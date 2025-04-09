@@ -90,7 +90,4 @@ If hibernation function is still not working,
    setup_var_cv PchSetup 0x16 0x1 0x0 # Disable RTC Memory Lock
    setup_var_cv PchSetup 0x04 0x1 0x3 # Deep Sx Power policy: S4-S5/Battery
    ```
-
-## Problem
-Touchpad and its gestures function correctly only in 'Polling Mode'
 ---
