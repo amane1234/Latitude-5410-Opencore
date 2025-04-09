@@ -1,4 +1,4 @@
-# Dell Latitude 5410
+# Dell Latitude 5410 OC EFI
 
 
 ### Important Notes:
