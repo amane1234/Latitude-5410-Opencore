@@ -78,7 +78,7 @@ These adjustments ensure compatibility with macOS and prevent boot issues relate
 
 To enable **S4 Hibernation (Write-to-Disk)**, follow these steps:
 
-1. Set `ThirdpartyDrives` to `true` in your `config.plist`. (Only if you use SATA M.2)
+1. Set `ThirdpartyDrives` to `true` in your `config.plist`. (Only required if you use SATA M.2)
 2. Set `Hibernatemode` to `Auto` in the `config.plist`.
 3. Open the terminal and run:  
    ```
