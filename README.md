@@ -1,5 +1,5 @@
 # Dell Latitude 5410 OC EFI
-
+Opencore EFI for Dell Latitude 5410
 
 ### Important Notes:
 - **Generate Your Own SMBIOS**: To ensure the proper functioning of iServices (iMessage, FaceTime, etc.), it’s critical to **generate your own valid SMBIOS**.
