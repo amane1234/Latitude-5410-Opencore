@@ -3,8 +3,11 @@ Opencore EFI for Dell Latitude 5410
 
 ### Important Notes:
 - **Generate Your Own SMBIOS**: To ensure the proper functioning of iServices (iMessage, FaceTime, etc.), it’s critical to **generate your own valid SMBIOS**.
+  
 - **Wi-Fi Support**: This EFI uses `itlwm` (Intel Wi-Fi) for wireless connectivity. To enable Wi-Fi, download and install [HeliPort](https://github.com/OpenIntelWireless/HeliPort) for easier management.
+  
 - **CFG-Lock & DVMT**: One must unlock CFG & allocated DMVT memory before installation.
+  
 - **NVME Storage**: The default intel NVME does not support Hackintosh, you must replace it.
 
 ---
