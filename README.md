@@ -15,7 +15,7 @@
 |----------------------------|---------------------------------------|
 | **CPU**                     | Intel i5-10310U                      |
 | **iGPU**                    | Intel® UHD 620 Graphics              |
-| **Storage**                 | SN 570 1TB NVMe                      |
+| **Storage**                 | SN 570 1TB NVME                      |
 | **SMBIOS**                  | MacBookPro 16,3                      |
 | **macOS Version**           | macOS Sequoia                        |
 
