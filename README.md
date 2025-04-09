@@ -87,7 +87,7 @@ If hibernation function is still not working,
 5. Put `RTCMemoryFixup.kext` to your EFI and add `rtcfx_exclude=0x80-0xAB` to your boot-args [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup)
 6. Run the following command in `modGRUBShell.efi`:  
    ```
-   setup_var_cv PchSetup 0x16 0x1 0x0  // Disable RTC Memory Lock
-   setup_var_cv PchSetup 0x04 0x1 0x3  // Deep Sx Power policy: S4-S5/Battery
+   setup_var_cv PchSetup 0x16 0x1 0x0
+   setup_var_cv PchSetup 0x04 0x1 0x3
    ```
 ---
