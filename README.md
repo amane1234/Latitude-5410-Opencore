@@ -92,5 +92,6 @@ If hibernation function is still not working,
    ```
    setup_var_cv PchSetup 0x16 0x1 0x0
    setup_var_cv PchSetup 0x04 0x1 0x3
+   setup_var_cv Setup 0x14 0x1 0x0 
    ```
 ---
