@@ -1,5 +1,5 @@
 # Dell Latitude 5410 OC EFI
-Opencore EFI for Dell Latitude 5410
+Opencore EFI for Dell Latitude 5410 P98G007
 
 ### Important Notes:
 - **Generate Your Own SMBIOS**: To ensure the proper functioning of iServices (iMessage, FaceTime, etc.), it’s critical to **generate your own valid SMBIOS**.
@@ -12,7 +12,7 @@ Opencore EFI for Dell Latitude 5410
 
 ---
 
-## Laptop Specifications
+## Laptop Specifications Latitude 5410 P98G007
 
 | Component                  | Specification                         |
 |----------------------------|---------------------------------------|
