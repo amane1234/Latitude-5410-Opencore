@@ -16,11 +16,12 @@ Opencore EFI for Dell Latitude 5410 P98G007
 
 | Component                  | Specification                         |
 |----------------------------|---------------------------------------|
-| **CPU**                     | Intel i5-10310U                      |
-| **iGPU**                    | Intel® UHD 620 Graphics              |
-| **Storage**                 | SN 570 1TB NVME                      |
-| **SMBIOS**                  | MacBookPro 16,3                      |
-| **macOS Version**           | macOS Sequoia                        |
+| **CPU**                    | Intel i5-10310U                       |
+| **iGPU**                   | Intel® UHD 620 Graphics               |
+| **Storage**                | SN 570 1TB NVME                       |
+| **WIFI/BT**                | Intel AX201                           |
+| **SMBIOS**                 | MacBookPro 16,3                       |
+| **macOS Version**          | macOS Sequoia                         |
 
 ---
 
@@ -87,11 +88,14 @@ To enable **S4 Hibernation (Write-to-Disk)**, follow these steps:
 If hibernation function is still not working,
 
 4. Put `Hibernationfixup.kext` to your EFI and add `hbfx-ahbm=XX` to your boot-args [Hibernationfixup](https://github.com/acidanthera/HibernationFixup)
-5. Put `RTCMemoryFixup.kext` to your EFI and add `rtcfx_exclude=0x80-0xAB` to your boot-args [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup)
+5. Put `RTCMemoryFixup.kext` to your EFI and add `rtcfx_exclude=0x80-0xAB` to your boot-args [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup) (Optional)
 6. Run the following command in `modGRUBShell.efi`:  
    ```
-   setup_var_cv PchSetup 0x16 0x1 0x0
-   setup_var_cv PchSetup 0x04 0x1 0x3
-   setup_var_cv Setup 0x14 0x1 0x0 
+   setup_var_cv PchSetup 0x16 0x1 0x0  // Disable RTC Memory Lock
+   setup_var_cv PchSetup 0x04 0x1 0x3  // Deep Sx Power policy: S4-S5/Battery
+   setup_var_cv Setup 0x14 0x1 0x0     // Disable Low Power S0 Idle Capability
    ```
+
+## Bugs
+- The Touchpad only works under "Force-Polling" mode
 ---
