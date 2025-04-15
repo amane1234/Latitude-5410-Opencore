@@ -97,5 +97,5 @@ If hibernation function is still not working,
    ```
 
 ## Bugs
-- The Touchpad only works under "Force-Polling" mode
+- Since this hackintosh build uses Sequoia, Realtek SD card reader might not work.
 ---
