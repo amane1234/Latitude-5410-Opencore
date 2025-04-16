@@ -46,6 +46,7 @@ Before booting into macOS, it’s essential to configure specific BIOS settings 
 - **Wake on AC**
 - **Wake on Dell USB-C Dock**
 - **Enable UEFI Network Stack**
+- **Touchscreen**
 
 ---
 
@@ -98,4 +99,6 @@ If hibernation function is still not working,
 
 ## Bugs
 - Since this hackintosh build uses Sequoia, Realtek SD card reader might not work.
+- Unable to disable TPD1 device
+- Touchscreen provokes erratic behaviors.
 ---
