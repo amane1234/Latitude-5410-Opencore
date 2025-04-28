@@ -86,19 +86,21 @@ To enable **S4 Hibernation (Write-to-Disk)**, follow these steps:
    ```
    sudo pmset hibernatemode 3
    ```
-If hibernation function is still not working,
+If hibernation function is still not working, follow these steps:
 
-4. Put `Hibernationfixup.kext` to your EFI and add `hbfx-ahbm=XX` to your boot-args [Hibernationfixup](https://github.com/acidanthera/HibernationFixup)
-5. Put `RTCMemoryFixup.kext` to your EFI and add `rtcfx_exclude=0x80-0xAB` to your boot-args [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup) (Optional)
-6. Run the following command in `modGRUBShell.efi`:  
+4. Run the following command in `modGRUBShell.efi`:  
    ```
    setup_var_cv PchSetup 0x16 0x1 0x0  // Disable RTC Memory Lock
-   setup_var_cv PchSetup 0x04 0x1 0x3  // Deep Sx Power policy: S4-S5/Battery
    setup_var_cv Setup 0x14 0x1 0x0     // Disable Low Power S0 Idle Capability
    ```
+5. Put `Hibernationfixup.kext` to your EFI and add `hbfx-ahbm=129` to your boot-args [Hibernationfixup](https://github.com/acidanthera/HibernationFixup)
+6. Put `RTCMemoryFixup.kext` to your EFI and add `rtcfx_exclude=0x80-0xAB` to your boot-args [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup) (Usually not required with disabled RTC Lock)
 
 ## Bugs
-- Since this hackintosh build uses Sequoia, Realtek SD card reader might not work.
-- Unable to disable TPD1 device
+- With Sequoia OS, Realtek SD card reader may not work.
+- Unable to disable TPD1 device. The device become irresponsible when TPD1 is disabled.
 - Touchscreen provokes erratic behaviors.
+- The very first hibernation will not work properly.
+- The default Intel NVME storage causes kernel panic, one must replace it.
+- There is some possibility that NVME and iGPU (RC6 standby) conflict each other, if you find NVME kernel panic problem [NVME kernel panic](https://github.com/acidanthera/bugtracker/issues/1193) add `forceRenderStandby=0` to your boot-args 
 ---
