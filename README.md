@@ -55,6 +55,7 @@ Before booting into macOS, it’s essential to configure specific BIOS settings 
 Install ComboJack. Make sure to add bootargs alcverbs=1 or DeviceProperties to audio pci-root alc-verbs | DATA | 01000000
 
 [ComboJack](https://github.com/macos86/ComboJack)
+
 ---
 
 ## ⚠️ Important! Hidden BIOS Setting Adjustments ⚠️
