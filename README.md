@@ -50,6 +50,13 @@ Before booting into macOS, it’s essential to configure specific BIOS settings 
 
 ---
 
+## 3.5mm Headphone Jack
+
+Install ComboJack. Make sure to add bootargs alcverbs=1 or DeviceProperties to audio pci-root alc-verbs | DATA | 01000000
+
+[ComboJack](https://github.com/macos86/ComboJack)
+---
+
 ## ⚠️ Important! Hidden BIOS Setting Adjustments ⚠️
 
 This EFI configuration does not enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuffer-stolenmem`. To address this, you will need to use **modGRUBShell.efi** to make the necessary adjustments before installation. Make sure to follow these steps:
