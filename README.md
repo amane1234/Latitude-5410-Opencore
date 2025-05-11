@@ -1,114 +1,123 @@
-# Dell Latitude 5410 OC EFI
-Opencore EFI for Dell Latitude 5410 P98G007
+# **Dell Latitude 5410 OpenCore EFI**
+
+OpenCore EFI for Dell Latitude 5410 (P98G007) and 5310
+
+---
 
 ### Important Notes:
-- **Generate Your Own SMBIOS**: To ensure the proper functioning of iServices (iMessage, FaceTime, etc.), it’s critical to **generate your own valid SMBIOS**.
-  
-- **Wi-Fi Support**: This EFI uses `itlwm` (Intel Wi-Fi) for wireless connectivity. To enable Wi-Fi, download and install [HeliPort](https://github.com/OpenIntelWireless/HeliPort) for easier management.
-  
-- **CFG-Lock & DVMT**: One must unlock CFG & allocated DMVT memory before installation.
-  
-- **NVME Storage**: The default intel NVME does not support Hackintosh, you must replace it.
+
+* **SMBIOS**: Generate your own to enable iServices (iMessage, FaceTime, etc.).
+* **Wi-Fi**: Uses `itlwm.kext`. Install [HeliPort](https://github.com/OpenIntelWireless/HeliPort) for Wi-Fi management.
+* **CFG-Lock & DVMT**: Must unlock CFG and set DVMT memory before installation.
+* **NVMe**: Default Intel NVMe is unsupported; replace it.
 
 ---
 
-## Laptop Specifications Latitude 5410 P98G007
+## **Laptop Specs – Latitude 5410 (P98G007)**
 
-| Component                  | Specification                         |
-|----------------------------|---------------------------------------|
-| **CPU**                    | Intel i5-10310U                       |
-| **iGPU**                   | Intel® UHD 620 Graphics               |
-| **Storage**                | SN 570 1TB NVME                       |
-| **WIFI/BT**                | Intel AX201                           |
-| **SMBIOS**                 | MacBookPro 16,3                       |
-| **macOS Version**          | macOS Sequoia                         |
-
----
-
-## Creating a Bootable USB
-
-To create a bootable USB installer for macOS with OpenCore, follow the official [Dortania OpenCore Installation Guide](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/). This guide provides step-by-step instructions for setting up a USB installer, downloading necessary files, and configuring OpenCore for macOS installation.
+| Component    | Specification   |
+| ------------ | --------------- |
+| **CPU**      | Intel i5-10310U |
+| **iGPU**     | Intel UHD 620   |
+| **Storage**  | SN570 1TB NVMe  |
+| **Wi-Fi/BT** | Intel AX201     |
+| **SMBIOS**   | MacBookPro 16,3 |
+| **macOS**    | macOS Sequoia   |
 
 ---
 
-## BIOS Settings
+## **Create Bootable USB**
 
-Before booting into macOS, it’s essential to configure specific BIOS settings to ensure macOS boots properly and functions optimally on the Dell Latitude 5410.
+Follow the [Dortania Guide](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/) for step-by-step instructions.
+
+---
+
+## **BIOS Settings**
 
 ### Enable:
-- **SATA Operation**: AHCI
-- **Fastboot**: Minimal (Optional)
 
-### Disable (optional):
-- **Secure Boot**
-- **Absolute**
-- **Intel SGX**
-- **Wake on AC**
-- **Wake on Dell USB-C Dock**
-- **Enable UEFI Network Stack**
-- **Touchscreen**
+* SATA Operation: AHCI
+* Fast Boot: Minimal (optional)
 
----
+### Disable:
 
-## 3.5mm Headphone Jack
-
-Install ComboJack. Make sure to add bootargs alcverbs=1 or DeviceProperties to audio pci-root alc-verbs | DATA | 01000000
-
-[ComboJack](https://github.com/macos86/ComboJack)
+* Secure Boot
+* Absolute
+* Intel SGX
+* Wake on AC
+* Wake on Dell USB-C Dock
+* UEFI Network Stack
+* Touchscreen
 
 ---
 
-## ⚠️ Important! Hidden BIOS Setting Adjustments ⚠️
+## **3.5mm Headphone Jack**
 
-This EFI configuration does not enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuffer-stolenmem`. To address this, you will need to use **modGRUBShell.efi** to make the necessary adjustments before installation. Make sure to follow these steps:
+Install [ComboJack](https://github.com/macos86/ComboJack).
+Add boot-args: `alcverbs=1` or use `DeviceProperties`.
 
-1. **Disable CFG Lock**  
-   Run the following command in `modGRUBShell`:  
+---
+
+## ⚠️ **Hidden BIOS Settings (modGRUBShell Required)**
+
+This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuffer-stolenmem`. Use **modGRUBShell.efi**:
+
+1. **Disable CFG Lock**
+
    ```
    setup_var_cv CpuSetup 0x3E 0x1 0x0
    ```
 
-2. **Set DVMT Pre-Allocated Memory to 64MB**  
-   To configure DVMT pre-allocated memory, run:  
+2. **Set DVMT Pre-Allocated to 64MB**
+
    ```
    setup_var_cv SaSetup 0xF5 0x1 0x2
    ```
 
-3. **Set DVMT Total Graphics Memory to Maximum**  
-   To allocate the maximum memory to the iGPU, run:  
+3. **Set DVMT Total GFX Memory to Max**
+
    ```
    setup_var_cv SaSetup 0xF6 0x1 0x3
    ```
 
-These adjustments ensure compatibility with macOS and prevent boot issues related to graphics and power management.
-
 ---
 
-## Enable Hibernation (S4) (This EFI has S4 enabled by default)
+## **Enable Hibernation (S4)**
 
-To enable **S4 Hibernation (Write-to-Disk)**, follow these steps:
+(Supported by default in this EFI)
 
-1. Set `ThirdpartyDrives` to `true` in your `config.plist`. (Only required if you use SATA M.2)
-2. Set `Hibernatemode` to `Auto` in the `config.plist`.
-3. Open the terminal and run:  
+1. In `config.plist`:
+
+   * `ThirdpartyDrives = true` (if using SATA M.2)
+   * `Hibernatemode = NVRAM`
+
+2. Run:
+
    ```
    sudo pmset hibernatemode 3
    ```
-If hibernation function is still not working, follow these steps:
 
-4. Run the following command in `modGRUBShell.efi`:  
-   ```
-   setup_var_cv PchSetup 0x16 0x1 0x0  // Disable RTC Memory Lock
-   setup_var_cv Setup 0x14 0x1 0x0     // Disable Low Power S0 Idle Capability
-   ```
-5. Put `Hibernationfixup.kext` to your EFI and add `hbfx-ahbm=129` to your boot-args [Hibernationfixup](https://github.com/acidanthera/HibernationFixup)
-6. Put `RTCMemoryFixup.kext` to your EFI and add `rtcfx_exclude=0x80-0xAB` to your boot-args [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup) (Usually not required with disabled RTC Lock)
+3. If it fails, in `modGRUBShell` run:
 
-## Bugs
-- With Sequoia OS, Realtek SD card reader may not work.
-- Unable to disable TPD1 device. The device become irresponsible when TPD1 is disabled.
-- Touchscreen provokes erratic behaviors.
-- The very first hibernation will not work properly.
-- The default Intel NVME storage causes kernel panic, one must replace it.
-- There is some possibility that NVME and iGPU (RC6 standby) conflict each other, if you find NVME kernel panic problem [NVME kernel panic](https://github.com/acidanthera/bugtracker/issues/1193) add `forceRenderStandby=0` to your boot-args 
+   ```
+   setup_var_cv PchSetup 0x16 0x1 0x0     // Disable RTC Lock  
+   setup_var_cv Setup 0x14 0x1 0x0        // Disable Low Power S0 Idle
+   ```
+
+4. Add to EFI:
+
+   * `Hibernationfixup.kext` + `hbfx-ahbm=129`
+   * `RTCMemoryFixup.kext` + `rtcfx_exclude=0x80-0xAB`
+
+---
+
+## **Known Issues**
+
+* Realtek SD card reader doesn’t work on Sequoia.
+* TPD1 device can’t be disabled. Disabling the device make the touchpad irresiponsive.
+* Touchscreen causes erratic behavior.
+* The default Intel NVMe ssd causes kernel panic; must be replaced.
+* iGPU (RC6) and NVMe may conflict. If so, add `forceRenderStandby=0`
+  [NVMe Panic Details](https://github.com/acidanthera/bugtracker/issues/1193)
+
 ---
