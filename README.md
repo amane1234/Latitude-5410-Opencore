@@ -110,11 +110,12 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 
 ---
 
-## **Known Issues**
+## **Known Issues & Tips**
 
 * Realtek SD card reader doesn’t work on Sequoia.
 * TPD1 device can’t be disabled. Disabling the device make the touchpad irresiponsive.
 * Touchscreen causes erratic behavior.
+* The default PL1/PL2 are set to 45W 64W, change the value for better power mamagement.
 * iGPU (RC6) and NVMe may conflict. If so, add `forceRenderStandby=0`
   [NVMe Panic Details](https://github.com/acidanthera/bugtracker/issues/1193)
 
