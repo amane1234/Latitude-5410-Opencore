@@ -9,7 +9,6 @@ OpenCore EFI for Dell Latitude 5410 (P98G007) and 5310
 * **SMBIOS**: Generate your own to enable iServices (iMessage, FaceTime, etc.).
 * **Wi-Fi**: Uses `itlwm.kext`. Install [HeliPort](https://github.com/OpenIntelWireless/HeliPort) for Wi-Fi management.
 * **CFG-Lock & DVMT**: Must unlock CFG and set DVMT memory before installation.
-* **NVMe**: Default Intel NVMe is unsupported; replace it.
 
 ---
 
@@ -116,7 +115,6 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 * Realtek SD card reader doesn’t work on Sequoia.
 * TPD1 device can’t be disabled. Disabling the device make the touchpad irresiponsive.
 * Touchscreen causes erratic behavior.
-* The default Intel NVMe ssd causes kernel panic; must be replaced.
 * iGPU (RC6) and NVMe may conflict. If so, add `forceRenderStandby=0`
   [NVMe Panic Details](https://github.com/acidanthera/bugtracker/issues/1193)
 
