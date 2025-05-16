@@ -107,8 +107,8 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 
 4. Add to EFI:
 
-   * `Hibernationfixup.kext` + `hbfx-ahbm=129`
-   * `RTCMemoryFixup.kext` + `rtcfx_exclude=0x80-0xAB`
+   * `Hibernationfixup.kext` + boot-args: `hbfx-ahbm=129`
+   * `RTCMemoryFixup.kext` + boot-args: `rtcfx_exclude=0x80-0xAB`
 
 ---
 
