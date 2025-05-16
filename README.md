@@ -36,16 +36,17 @@ Follow the [Dortania Guide](https://dortania.github.io/OpenCore-Install-Guide/in
 ### Enable:
 
 * SATA Operation: AHCI
-* Fast Boot: Minimal (optional)
+* Fast Boot: Minimal
 
 ### Disable:
 
 * Secure Boot
 * Absolute
-* Intel SGX
+* TPM
 * Wake on AC
 * Wake on Dell USB-C Dock
 * UEFI Network Stack
+* Intel VT-D
 * Touchscreen
 
 ---
