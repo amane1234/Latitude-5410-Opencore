@@ -110,6 +110,21 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 
 ---
 
+## **Bluetooth fix for AX 201**
+
+1. **Disable intel WoV(Wake on Voice)**
+
+   With **modGRUBShell.efi**
+
+   ```
+   setup_var_cv PchSetup 0x586  0x1 0x0      # Disable Intel WoV DSP Firmware
+   ```
+
+2. **Turn off while the system goes sleep**
+   [How to turn off bluetooth while sleep with Sleepwatcher](https://github.com/amane1234/Wakeup_bluetooth_fix).
+
+
+
 ## **Known Issues & Tips**
 
 * Realtek SD card reader doesn’t work on Sequoia.
