@@ -53,6 +53,7 @@ Follow the [Dortania Guide](https://dortania.github.io/OpenCore-Install-Guide/in
 ## **3.5mm Headphone Jack**
 
 [ComboJack](https://github.com/macos86/ComboJack).
+
 Add boot-args: `alcverbs=1` or use `DeviceProperties`.
 
 ---
@@ -117,10 +118,11 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
    With **modGRUBShell.efi**
 
    ```
-   setup_var_cv PchSetup 0x586  0x1 0x0      # Disable Intel WoV DSP Firmware
+   setup_var_cv PchSetup 0x586  0x1 0x0
    ```
 
 2. **Turn off while the system goes sleep**
+
    [How to turn off bluetooth while sleep with Sleepwatcher](https://github.com/amane1234/Wakeup_bluetooth_fix).
 
 
