@@ -52,7 +52,7 @@ Follow the [Dortania Guide](https://dortania.github.io/OpenCore-Install-Guide/in
 
 ## **3.5mm Headphone Jack**
 
-Install [ComboJack](https://github.com/macos86/ComboJack).
+[ComboJack](https://github.com/macos86/ComboJack).
 Add boot-args: `alcverbs=1` or use `DeviceProperties`.
 
 ---
