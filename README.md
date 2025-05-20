@@ -128,12 +128,14 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 
 
 
-## **Known Issues & Tips**
+## **Issues & Tips**
 
-* Realtek SD card reader doesn’t work on Sequoia.
+* Realtek SD card reader doesn’t work on Sequoia. However, you may build & try this: [RealtekCardReaderFriend for Sequoia](https://github.com/Lorys89/RealtekCardReaderFriend)
 * TPD1 device can’t be disabled. Disabling the device make the touchpad irresiponsive.
 * Touchscreen causes erratic behavior.
 * The default PL1/PL2 are set to 45W 64W, change the value for better power mamagement.
 * iGPU (RC6) and NVMe may conflict. If so, add `forceRenderStandby=0`, [NVMe Panic Details](https://github.com/acidanthera/bugtracker/issues/1193)
+* Sometimes, waking up from hibernation (S4) can result in a black screen or cause inaccessibility to directories and apps. To resolve the black screen issue, you may need to close and reopen the laptop lid. Additionally, disabling the `RebuildAppleMemoryMap` quirk and enabling `EnableWriteUnprotector` can help resolve the accessibility issue.
 
 ---
+
