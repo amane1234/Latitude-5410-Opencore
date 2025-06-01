@@ -38,7 +38,7 @@ Follow the [Dortania Guide](https://dortania.github.io/OpenCore-Install-Guide/in
 * SATA Operation: AHCI
 * Fast Boot: Minimal
 
-### Disable:
+### Disable (Optional):
 
 * Secure Boot
 * Absolute
@@ -46,7 +46,7 @@ Follow the [Dortania Guide](https://dortania.github.io/OpenCore-Install-Guide/in
 * Wake on AC
 * Wake on Dell USB-C Dock
 * UEFI Network Stack
-* Intel VT-D
+* Intel VT-D (If you do not want to use Apple VTD)
 * Touchscreen
 
 ---
@@ -75,7 +75,7 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
    setup_var_cv SaSetup 0xF5 0x1 0x2
    ```
 
-3. **Set DVMT Total GFX Memory to Max**
+3. **Set DVMT Total GFX Memory to Max (Optional)**
 
    ```
    setup_var_cv SaSetup 0xF6 0x1 0x3
@@ -108,11 +108,11 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 4. Add to EFI:
 
    * `Hibernationfixup.kext` + boot-args: `hbfx-ahbm=129`
-   * `RTCMemoryFixup.kext` + boot-args: `rtcfx_exclude=0x80-0xAB`
+   * `RTCMemoryFixup.kext` + boot-args: `rtcfx_exclude=0x80-0xAB` (Needed only when you see CMOS reset problem)
 
 ---
 
-## **Bluetooth fix for AX 201**
+## **Bluetooth fix for AX 201(Optional)**
 
 1. **Disable intel WoV(Wake on Voice)**
 
@@ -122,7 +122,7 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
    setup_var_cv PchSetup 0x586  0x1 0x0
    ```
 
-2. **Turn off while the system goes sleep**
+2. **Turn off when the system wake-up**
 
    [How to turn off bluetooth while sleep with Sleepwatcher](https://github.com/amane1234/Wakeup_bluetooth_fix).
 
@@ -133,7 +133,8 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 * Realtek SD card reader doesn’t work on Sequoia. However, you may build & try this: [RealtekCardReaderFriend for Sequoia](https://github.com/Lorys89/RealtekCardReaderFriend)
 * TPD1 device can’t be disabled. Disabling the device make the touchpad irresiponsive.
 * Touchscreen causes erratic behavior.
-* The default PL1/PL2 are set to 45W 64W, change the value for better power mamagement.
+* Forcing Apple GuC injection using igfxfw=2 can improve iGPU performance by up to 20%. This also increases the iGPU base clock from 300 MHz to 500 MHz, resulting in higher power consumption.
+* The default PL1/PL2 are set to 15W 64W, change the PL2 value for better power mamagement.
 * iGPU (RC6) and NVMe may conflict. If so, add `forceRenderStandby=0`, [NVMe Panic Details](https://github.com/acidanthera/bugtracker/issues/1193)
 
 ---
