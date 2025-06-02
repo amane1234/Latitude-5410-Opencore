@@ -149,8 +149,8 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
    setup_var_cv PchSetup 0x04 0x1 0x3   # Deep Sx Power policy: S4-S5/Battery
    setup_var_cv Setup 0x4B4 0x1 0x3     # Enable ASPM: L0s and L1
    setup_var_cv Setup 0x38 0x1 0x1      # Enable Sensor Standby
-   setup_var SaSetup 0x123 0x1 0x3      # DMI ASPM: L0s and L1
-   setup_var PchSetup 0x4F6 0x1 0x3     # DMI ASPM: L0s and L1
+   setup_var_cv SaSetup 0x123 0x1 0x3   # DMI ASPM: L0s and L1
+   setup_var_cv PchSetup 0x4F6 0x1 0x3  # DMI ASPM: L0s and L1
    ```
 ---
 
