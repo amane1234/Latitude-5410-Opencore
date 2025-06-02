@@ -137,5 +137,20 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 * The default PL1/PL2 are set to 15W 64W, change the PL2 value for better power mamagement.
 * iGPU (RC6) and NVMe may conflict. If so, add `forceRenderStandby=0`, [NVMe Panic Details](https://github.com/acidanthera/bugtracker/issues/1193)
 
+
+## (Experimental) Bios settings for better power consumption
+
+   ```
+   setup_var_cv CpuSetup 0xDA 0x1 0x0   # Overclocking Lock Disable
+   setup_var_cv CpuSetup 0x39 0x1 0x0   # C-State Auto Demotion Disable
+   setup_var_cv CpuSetup 0x3A 0x1 0x3   # C-State Un-demotion at C1 and C3
+   setup_var_cv CpuSetup 0x3B 0x1 0x0   # Package C-State demotion Disable
+   setup_var_cv CpuSetup 0x3C 0x1 0x1   # Package C-State Un-demotion Enable
+   setup_var_cv PchSetup 0x04 0x1 0x3   # Deep Sx Power policy: S4-S5/Battery
+   setup_var_cv Setup 0x4B4 0x1 0x3     # Enable ASPM: L0s and L1
+   setup_var_cv Setup 0x38 0x1 0x1      # Enable Sensor Standby
+   setup_var SaSetup 0x123 0x1 0x3      # DMI ASPM: L0s and L1
+   setup_var PchSetup 0x4F6 0x1 0x3     # DMI ASPM: L0s and L1
+   ```
 ---
 
