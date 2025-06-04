@@ -126,7 +126,21 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 
    [How to turn off bluetooth while sleep with Sleepwatcher](https://github.com/amane1234/Wakeup_bluetooth_fix).
 
+---
 
+## **Notes for Low Power S0 Idle**
+
+The default value of Low Power S0 Idle is enabled, which conflicts S3 Sleep wake up and S4 Sleep.
+
+I strongly recommand to use S3 sleep by disabling Low Power S0 Idle capability by:
+
+   ```
+   setup_var_cv Setup 0x14 0x1 0x0        // Disable Low Power S0 Idle
+   ```
+
+However, if you want to use S0 Idle, you can add SSDT-DeepIdle.aml to your ACPI folder and leave the Setup 0x14 value at its default.
+
+---
 
 ## **Issues & Tips**
 
@@ -134,9 +148,10 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 * TPD1 device can’t be disabled. Disabling the device make the touchpad irresiponsive.
 * Touchscreen causes erratic behavior.
 * Forcing Apple GuC injection using igfxfw=2 can improve iGPU performance by up to 20%. This also increases the iGPU base clock from 300 MHz to 500 MHz, resulting in higher power consumption.
-* The default PL1/PL2 are set to 15W 64W, change the PL2 value for better power mamagement.
+* The default PL1/PL2 are set to 35W 64W, change the PL2 value for better power mamagement.
 * iGPU (RC6) and NVMe may conflict. If so, add `forceRenderStandby=0`, [NVMe Panic Details](https://github.com/acidanthera/bugtracker/issues/1193)
 
+---
 
 ## (Experimental) Bios settings for better power consumption
 
