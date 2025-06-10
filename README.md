@@ -145,11 +145,8 @@ However, if you want to use S0 Idle, you can add SSDT-DeepIdle.aml to your ACPI 
 ## **Issues & Tips**
 
 * Realtek SD card reader doesn’t work on Sequoia. However, you may build & try this: [RealtekCardReaderFriend for Sequoia](https://github.com/Lorys89/RealtekCardReaderFriend)
-* TPD1 device can’t be disabled. Disabling the device make the touchpad irresiponsive.
 * Touchscreen causes erratic behavior.
-* Forcing Apple GuC injection using igfxfw=2 can improve iGPU performance by up to 20%. This also increases the iGPU base clock from 300 MHz to 500 MHz, resulting in higher power consumption.
 * The default PL1/PL2 are set to 35W 64W, change the PL2 value for better power mamagement.
-* iGPU (RC6) and NVMe may conflict. If so, add `forceRenderStandby=0`, [NVMe Panic Details](https://github.com/acidanthera/bugtracker/issues/1193)
 
 ---
 
