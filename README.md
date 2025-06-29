@@ -2,6 +2,8 @@
 
 OpenCore EFI for Dell Latitude 5410 (P98G007) and 5310
 
+There will be no more update for this repo.
+
 ---
 
 ### Important Notes:
@@ -139,6 +141,22 @@ I strongly recommand to use S3 sleep by disabling Low Power S0 Idle capability b
    ```
 
 However, if you want to use S0 Idle, you can add SSDT-DeepIdle.aml to your ACPI folder and leave the Setup 0x14 value at its default.
+
+## **Notes for rps-control VS Apple GuC**
+
+Without injecting RPS control or Apple GuC, the Intel iGPU clock remains fixed at 300 MHz, resulting in reduced performance.
+
+Injecting RPS control allows dynamic scaling of the iGPU clock from 300 MHz to 1100 MHz, improving performance under load.
+
+Alternatively, using Apple GuC raises the base frequency to 500 MHz, enabling a range of 500 MHz to 1100 MHz. This offers better performance but slightly bad iGPU power management.
+
+However, there is a known issue with RPS control: after S3 (sleep) or S4 (hibernate) resume, the GPU may remain locked at 100% usage with the clock stuck at 1100 MHz, even when idle. This can lead to unnecessary power consumption and thermal load.
+
+Recommendation:
+
+   - If you frequently use S3/S4 sleep, it is safer to use Apple GuC or no injection to avoid the RPS bug.
+
+   - If you do not use sleep/hibernate, RPS control is recommended for better performance.
 
 ---
 
