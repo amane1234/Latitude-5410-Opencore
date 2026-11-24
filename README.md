@@ -167,6 +167,8 @@ Alternatively, using Apple GuC raises the base frequency to 500 MHz, enabling a 
 
 However, there is a known issue with RPS control: after S3 (sleep) or S4 (hibernate) resume, the GPU may remain locked at 100% usage with the clock stuck at 1100 MHz, even when idle. This can lead to unnecessary power consumption and thermal load.
 
+This efi uses forked whatevergreen, allowing  dynamic scaling of the iGPU clock from 300 MHz to 1100 MHz with Apple GuC
+
 Recommendation:
 
    - If you frequently use S3/S4 sleep, it is safer to use Apple GuC or no injection to avoid the RPS bug.
