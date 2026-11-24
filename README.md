@@ -9,7 +9,7 @@ There will be no more update for this repo.
 ### Important Notes:
 
 * **SMBIOS**: Generate your own to enable iServices (iMessage, FaceTime, etc.).
-* **Wi-Fi**: Uses `itlwm.kext`. Install [HeliPort](https://github.com/OpenIntelWireless/HeliPort) for Wi-Fi management.
+* **Wi-Fi**: It uses ForbiddenItlwm for Sequoia.
 * **CFG-Lock & DVMT**: Must unlock CFG and set DVMT memory before installation.
 
 ---
@@ -23,7 +23,7 @@ There will be no more update for this repo.
 | **Storage**  | SN570 1TB NVMe  |
 | **Wi-Fi/BT** | Intel AX201     |
 | **SMBIOS**   | MacBookPro 16,3 |
-| **macOS**    | macOS Sequoia   |
+| **macOS**    | Sequoia 15.8.2  |
 
 ---
 
@@ -37,8 +37,7 @@ Follow the [Dortania Guide](https://dortania.github.io/OpenCore-Install-Guide/in
 
 ### Enable:
 
-* SATA Operation: AHCI
-* Fast Boot: Minimal
+* SATA Operation: AHCI (Important)
 
 ### Disable (Optional):
 
@@ -92,15 +91,8 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 1. In `config.plist`:
 
    * `ThirdpartyDrives = true` (if using SATA M.2)
-   * `Hibernatemode = NVRAM`
 
-2. Run:
-
-   ```
-   sudo pmset hibernatemode 3
-   ```
-
-3. If it fails, in `modGRUBShell` run:
+2. In `modGRUBShell.efi` run:
 
    ```
    setup_var_cv PchSetup 0x16 0x1 0x0     // Disable RTC Lock  
@@ -125,7 +117,6 @@ With **modGRUBShell.efi**
    ```
    setup_var_cv PchSetup 0x18 0x01 0x01
    ```
-
 
 ---
 
@@ -179,25 +170,9 @@ Recommendation:
 
 ## **Issues & Tips**
 
-* Realtek SD card reader doesn’t work on Sequoia. However, you may build & try this: [RealtekCardReaderFriend for Sequoia](https://github.com/Lorys89/RealtekCardReaderFriend)
-* Touchscreen causes erratic behavior.
+* Realtek SD card reader seems does not work on Sequoia.
+
 * The default PL1/PL2 are set to 35W 64W, change the PL2 value for better power mamagement.
 
----
-
-## (Experimental) Bios settings for better power consumption
-
-   ```
-   setup_var_cv CpuSetup 0xDA 0x1 0x0   # Overclocking Lock Disable
-   setup_var_cv CpuSetup 0x39 0x1 0x0   # C-State Auto Demotion Disable
-   setup_var_cv CpuSetup 0x3A 0x1 0x3   # C-State Un-demotion at C1 and C3
-   setup_var_cv CpuSetup 0x3B 0x1 0x0   # Package C-State demotion Disable
-   setup_var_cv CpuSetup 0x3C 0x1 0x1   # Package C-State Un-demotion Enable
-   setup_var_cv PchSetup 0x04 0x1 0x3   # Deep Sx Power policy: S4-S5/Battery
-   setup_var_cv Setup 0x4B4 0x1 0x3     # Enable ASPM: L0s and L1
-   setup_var_cv Setup 0x38 0x1 0x1      # Enable Sensor Standby
-   setup_var_cv SaSetup 0x123 0x1 0x3   # DMI ASPM: L0s and L1
-   setup_var_cv PchSetup 0x4F6 0x1 0x3  # DMI ASPM: L0s and L1
-   ```
 ---
 
