@@ -114,6 +114,21 @@ This EFI doesn’t enable `AppleXcpmCfgLock`, `framebuffer-fbmem`, or `framebuff
 
 ---
 
+## **Force unlock on all GPIO pads(Optional)**
+
+The Dell Latitude 5410 uses an APIC-mode trackpad and blocks changes to it for security reasons.
+
+This EFI enables interrupt mode for both the trackpad and touchscreen via APIC. If you prefer GPIO pinning instead, you will need to modify the GPIO device settings through a BIOS mod
+
+With **modGRUBShell.efi**
+
+   ```
+   setup_var_cv PchSetup 0x18 0x01 0x01
+   ```
+
+
+---
+
 ## **Bluetooth fix for AX 201(Optional)**
 
 1. **Disable intel WoV(Wake on Voice)**
